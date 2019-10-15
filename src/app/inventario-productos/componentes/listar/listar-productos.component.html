@@ -1,0 +1,41 @@
+<button class="btn my-3 btn-primary btn-default" [routerLink]="['/inventario/crear-producto']">Crear producto</button>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>nombre</th>
+      <th>precio</th>
+      <th>Tipo Producto</th>
+      <th>Fecha Creacion</th>
+      <th>Fecha Vencimiento</th>
+      <th>Cantidad Disponible</th>
+      <th>Última Cantidad Creada</th>
+      <th>Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngFor="let producto of productos">
+      <td>{{producto.nombre}}</td>
+      <td style=" text-align: center">{{producto.precio}}</td>
+      <td style=" text-align: center">{{producto.tipoProducto}}</td>
+      <td style=" text-align: center">{{producto.fechaCreacion}}</td>
+      <td title="Próducto próximo a vencer" *ngIf="calcularDiferenciaFechas(producto) < 5 else cambiarColor">
+        <p style="padding: 0; background-color:#dc3545c2; color: white; border-radius: 4px; text-align: center;">
+          {{producto.fechaVencimiento}}</p>
+      </td>
+      <ng-template #cambiarColor>
+        <td style=" text-align: center">{{producto.fechaVencimiento}}</td>
+      </ng-template>
+      <td style=" text-align: center">{{producto.cantidadDisponible}}</td>
+      <td style=" text-align: center">{{producto.cantidadCreada}}</td>
+      <td>
+        <button type="button" name="borrar" class="btn btn-danger btn-sm"
+          (click)="borrarProducto(producto)">Borrar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+
+</script>
