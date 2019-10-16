@@ -14,7 +14,7 @@ export class InventarioProductosComponent implements OnInit {
 
   productos: Producto[];
 
-
+  filtroProductos='';
   constructor(private servicioInventario: InventarioService,
     private router: Router) { }
 
@@ -24,16 +24,13 @@ export class InventarioProductosComponent implements OnInit {
 
     );
 
-
-
-
   }
 
   calcularDiferenciaFechas(producto: Producto): number {
     var fechaActual = moment()
     var fechaVencimiento = moment(producto.fechaVencimiento)
     var dias = fechaVencimiento.diff(fechaActual, 'days');
-    console.log(dias)
+    console.log("dias")
     return dias;
   }
   borrarProducto(producto: Producto): void {
@@ -51,7 +48,7 @@ export class InventarioProductosComponent implements OnInit {
       text: "Esta acción no se puede revertir!",
       type: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, eliminar!',
+      confirmButtonText: 'Sí, eliminar!',
       cancelButtonText: 'No, cancelar!',
       reverseButtons: true
     }).then((result) => {

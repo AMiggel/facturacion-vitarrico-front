@@ -24,4 +24,13 @@ export class InventarioService {
   borrarProducto(id:number): Observable<Producto>{
     return this.http.delete<Producto>(`${this.urlEndPoint}/${id}`, {headers:this.httpHeaders})
   }
+
+  modificarProducto(producto:Producto): Observable<Producto> {
+    return this.http.put<Producto>(`${this.urlEndPoint}modificar-producto/${producto.id}`,producto,{headers:this.httpHeaders})
+  }
+
+  buscarProducto(id):Observable<Producto>{
+    return this.http.get<Producto>(`${this.urlEndPoint}producto/${id}`)
+  }
+
 }

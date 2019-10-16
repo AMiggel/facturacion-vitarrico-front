@@ -4,8 +4,10 @@ import { InventarioProductosComponent } from './inventario-productos/componentes
 import { CrearComponent } from './inventario-productos/componentes/crear/crear-producto.component';
 
 const routes: Routes = [
+  {path:'', redirectTo:'/inventario/productos', pathMatch:'full'},
   {path:'inventario/productos', component:InventarioProductosComponent},
-  {path:'inventario/crear-producto', component:CrearComponent}
+  {path:'inventario/crear-producto', component:CrearComponent},
+  {path: 'inventario/crear-producto/:id', component:CrearComponent}
 ];
 
 @NgModule({

@@ -18,6 +18,16 @@ export class CrearComponent implements OnInit {
     private activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.cargarProducto()
+  }
+
+  cargarProducto():void{
+    this.activateRoute.params.subscribe(params=> {
+      let id = params['id']
+      if(id){
+        this.servicioInventario.buscarProducto(id).subscribe((producto) => this.producto=producto )
+      }
+    })
   }
 
   public crearProducto(): void {
@@ -25,6 +35,15 @@ export class CrearComponent implements OnInit {
       .subscribe(usuario => {
         this.router.navigate(['/inventario/crear-producto'])
         Swal.fire('Producto creado con éxito', ' ','success')
-      })
+      }, error=> Swal.fire(error.error.message,'','error')      
+      )
+  }
+
+  public modificarProducto():void{
+    this.servicioInventario.modificarProducto(this.producto)
+    .subscribe(producto => {
+      this.router.navigate(['/usuarios'])
+      Swal.fire('Producto modificado','','success')
+    })
   }
 }

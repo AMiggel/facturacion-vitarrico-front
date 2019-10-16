@@ -6,19 +6,21 @@ import { AppComponent } from './app.component';
 import { InventarioProductosComponent } from './inventario-productos/componentes/listar/listar-productos.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { ClientesComponent } from './clientes/clientes.component';
 import { CrearComponent } from './inventario-productos/componentes/crear/crear-producto.component';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from './inventario-productos/componentes/header/header.component'
+import { HeaderComponent } from './inventario-productos/componentes/header/header.component';
+import { FiltroPipe } from './inventario-productos/componentes/filtro.pipe'
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     InventarioProductosComponent,
-    ClientesComponent,
     CrearComponent,
     HeaderComponent,
+    FiltroPipe,
+  
     
   ],
   imports: [
