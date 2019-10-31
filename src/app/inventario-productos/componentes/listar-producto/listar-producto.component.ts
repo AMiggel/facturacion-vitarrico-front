@@ -1,38 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from '../../modelo/Producto';
 import { InventarioService } from '../../servicio/inventario.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import Swal from 'sweetalert2'
-import * as moment from 'moment';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-listar-productos',
-  templateUrl: './listar-productos.component.html',
-  styleUrls: ['./listar-productos.component.css']
+  selector: 'app-listar-producto',
+  templateUrl: './listar-producto.component.html',
+  styleUrls: ['./listar-producto.component.css']
 })
-export class InventarioProductosComponent implements OnInit {
+export class ListarProductoComponent implements OnInit {
 
   productos: Producto[];
-
-  filtroProductos='';
   constructor(private servicioInventario: InventarioService,
     private router: Router) { }
 
   ngOnInit() {
-    this.servicioInventario.obtenerProductos().subscribe(
-      productos => this.productos = productos
-
+    this.servicioInventario.listarProducto().subscribe(
+      producto => this.productos = producto
     );
-
   }
 
-  calcularDiferenciaFechas(producto: Producto): number {
-    var fechaActual = moment()
-    var fechaVencimiento = moment(producto.fechaVencimiento)
-    var dias = fechaVencimiento.diff(fechaActual, 'days');
-    console.log("dias")
-    return dias;
-  }
   borrarProducto(producto: Producto): void {
 
     const swalWithBootstrapButtons = Swal.mixin({
@@ -42,7 +30,6 @@ export class InventarioProductosComponent implements OnInit {
       },
       buttonsStyling: false,
     })
-
     swalWithBootstrapButtons.fire({
       title: 'Está seguro?',
       text: "Esta acción no se puede revertir!",

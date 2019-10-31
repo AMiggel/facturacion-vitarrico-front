@@ -1,0 +1,43 @@
+<div class="container py-4">
+
+  <div class="card bg-light ">
+    <div class="card-header"> Listado de productos</div>
+    <div class="card-body">
+
+      <div class="row container">
+        <button class="btn my-4 btn-primary btn-default"><a style="color: white;"
+            [routerLink]="['/inventario/crear-producto']">Crear producto</a></button>
+           
+      </div>
+
+
+      <table class="table table-striped" style="border-top: 4px solid #ddd;">
+
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Tipo</th>
+            <th>Stock minimo</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let producto of productos">
+            <td>{{producto.id}}</td>
+            <td> <a [routerLink]="['/inventario/crear-producto',producto.id]">{{producto.nombre}}</a></td>
+            <td>{{producto.precio}}</td>
+            <td>{{producto.tipoProducto}}</td>
+            <td>{{producto.stockMinimo}}</td>
+            <td>
+              <button type="button" name="borrar" class="btn btn-danger btn-sm"
+                (click)="borrarProducto(producto)">Borrar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

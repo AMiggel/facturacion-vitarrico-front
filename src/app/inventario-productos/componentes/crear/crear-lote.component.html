@@ -1,0 +1,106 @@
+<div class="container py-4">
+  <div class="card bg-light text-white col-sm-6">
+    <div class="card-header">Crear nuevo lote</div>
+    <div class="card-body">
+      <h4 class="card-title">
+        <a class="btn btn-light btn-xs" href="/inventario/lotes">&laquo; volver</a>
+      </h4>
+
+      <form>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <mat-form-field class="example-full-width" style="width: 100%;">
+              <input style="color: black;" type="text" placeholder="Seleccione producto para crear el lote"
+                aria-label="Productos" matInput [formControl]="autocompleteProductos" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarNombre"
+                (optionSelected)="seleccionarProducto($event)">
+                <mat-option *ngFor="let producto of productosFiltrados | async" [value]="producto">
+                  {{producto.nombre}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group row">
+            <label for="nombre"></label>
+            <div class="col-sm-10">
+              <mat-form-field>
+                <input style="color: black;" matInput readonly type="text" name="nombre" [(ngModel)]="lote.nombre"
+                  placeholder="Nombre">
+              </mat-form-field>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label for="precio"></label>
+            <div class="col-sm-10">
+              <mat-form-field style="margin-left: 20%;">
+                <input type="number" style="color: black;" matInput readonly name="precio" [(ngModel)]="lote.precio"
+                  placeholder="Precio producto">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group row">
+            <label for="tipoProducto"></label>
+            <div class="col-sm-10">
+              <mat-form-field>
+                <input type="text" style="color: black;" matInput readonly name="tipoProducto"
+                  [(ngModel)]="lote.tipoProducto" placeholder="Tipo producto">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="stockMinimo"></label>
+            <div class="col-sm-10">
+              <mat-form-field style="margin-left: 20%;">
+                <input type="text" style="color: black;" matInput readonly name="stockMinimo"
+                  [(ngModel)]="lote.stockMinimo" placeholder="Stock minimo">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+        <div class="form-group row">
+          <label for="fechaVencimiento"></label>
+          <div class="col-sm-10">
+            <mat-form-field >
+              <input type="date" matInput style="color: black;" name="fechaVencimiento"
+                [(ngModel)]="lote.fechaVencimiento" placeholder="Fecha de Vencimiento">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="cantidadCreada"></label>
+          <div class="col-sm-10">
+            <mat-form-field style="margin-left: 20%;">
+              <input type="number" matInput style="color: black; height: 21px;" name="cantidadCreada" class="form-control"
+                [(ngModel)]="lote.cantidadCreada" placeholder="Cantidad a crear">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <button class=" btn btn-primary" role="button" (click)='crearLote()'
+              *ngIf="!lote.id else elseBlock">Crear</button>
+
+            <ng-template #elseBlock>
+              <button class="btn btn-primary btn-danger" role="button" (click)='modificarLote()'>Editar</button>
+            </ng-template>
+
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

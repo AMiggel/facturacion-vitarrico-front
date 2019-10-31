@@ -7,9 +7,9 @@ export class FiltroPipe implements PipeTransform {
 
   transform(value: any, ...arg: any): any {
     const resultado = [];
-    for (const producto of value) {
-      if (producto.nombre.toString().toLowerCase().indexOf(arg.toString().toLowerCase()) > -1) {
-        resultado.push(producto);
+    for (const lote of value) {
+      if (lote.nombre.toString().toLowerCase().indexOf(arg.toString().toLowerCase()) > -1) {
+        resultado.push(lote);
       }
     }
     return resultado;

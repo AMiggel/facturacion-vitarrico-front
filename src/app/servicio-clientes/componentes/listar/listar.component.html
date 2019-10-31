@@ -1,0 +1,37 @@
+<div class="container-fluid py-4">
+  <div class="card bg-light ">
+    <div class="card-header"> Listado de productos</div>
+    <div class="card-body">
+
+      <div class="row container-fluid">
+        <button class="btn my-4 btn-primary btn-default"><a style="color: white;"
+            [routerLink]="['/inventario/crear-producto']">Crear producto</a></button>
+
+        <input class="form-control col-6" id="busquedaProductos" name="filtroProductos" [(ngModel)]="filtroProductos"
+          placeholder="Buscar Producto" style=" margin: auto;" />
+      </div>
+
+      <table class="table table-striped" style="border-top: 4px solid #ddd;">
+        <thead>
+          <tr>
+            <th>Nombre completo</th>
+            <th>Fecha de registro</th>
+            <th> Correo electrónico</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clientes">
+            <td> <a>{{cliente.nombre}}</a></td>
+            <td>{{cliente.fechaCreacion}}</td>
+            <td>{{cliente.email}}</td>
+            <td>
+              <button type="button" name="borrar" class="btn btn-danger btn-sm"
+                (click)="borrarProducto(producto)">Borrar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

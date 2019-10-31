@@ -1,0 +1,55 @@
+<div class="container-fluid py-4">
+
+  <div class="card bg-light ">
+    <div class="card-header"> Listado de lotes</div>
+    <div class="card-body">
+
+      <div class="row container-fluid">
+        <button class="btn my-4 btn-primary btn-default"><a style="color: white;"
+            [routerLink]="['/inventario/crear-lote']">Crear nuevo lote</a></button>
+
+        <input class="form-control col-6" id="busquedaProductos" name="filtroProductos" [(ngModel)]="filtroProductos"
+          placeholder="Buscar Producto" style=" margin: auto;" />
+      </div>
+
+
+      <table class="table table-striped" style="border-top: 4px solid #ddd;">
+
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Tipo</th>
+            <th>Fecha Creacion</th>
+            <th>Vencimiento</th>
+            <th>Disponibles</th>
+            <th>Cantidad Creada</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let lote of lotes | filtro:filtroProductos">
+            <td> <a [routerLink]="['/inventario/crear-lote',lote.id]">{{lote.nombre}}</a></td>
+            <td style=" text-align: center">{{lote.precio}}</td>
+            <td style=" text-align: center">{{lote.tipoProducto}}</td>
+            <td style=" text-align: center">{{lote.fechaCreacion}}</td>
+            <td title="Próducto próximo a vencer" *ngIf="calcularDiferenciaFechas(lote) < 10 else cambiarColor">
+              <p style="padding: 0; background-color:#dc3545c2; color: white; border-radius: 4px; text-align: center;">
+                {{lote.fechaVencimiento}}</p>
+            </td>
+            <ng-template #cambiarColor>
+              <td style=" text-align: center">{{lote.fechaVencimiento}}</td>
+            </ng-template>
+            <td style=" text-align: center">{{lote.cantidadDisponible}}</td>
+            <td style=" text-align: center">{{lote.cantidadCreada}}</td>
+            <td>
+              <button type="button" name="borrar" class="btn btn-danger btn-sm"
+                (click)="borrarLote(lote)">Borrar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
